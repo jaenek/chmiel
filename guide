@@ -1,0 +1,31 @@
+1.format drives
+2.mount root,efi
+3.mirrorlist (with reflector)
+4. base base-devel linux linux-firmware grub sudo efibootmgr
+5. genfstab -U /mnt >> /mnt/etc/fstab
+6. arch-chroot /mnt
+7. ln -sf /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
+8. hwclock --systohc
+9. uncomment en_US.UTF-8 UTF-8 and locale-gen
+10. set LANG=en_US.UTF-8 in /etc/locale.conf
+11. set KEYMAP=pl in /etc/vconsole.conf
+12. set hostname in /etc/hostname
+13. mkinitcpio -P
+14. passwd
+15. grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=grub maybe add OS_PROBER
+16. grub-mkconfig -o /boot/grub/grub.cfg
+17. enable microcode intel-ucode or amd-ucode
+18. chsh -s /bin/zsh
+19. reboot
+20. add user
+21. echo -e "[Match]\nName=e*\n\n[Network]\nDHCP=yes" > /etc/systemd/network/10-wired.network, ip set link <int> up
+22. install yay
+24. install xorg-server, drivers, xorg-xinit, libxinerama, libxft, libxrandr, ttf-unifont, gnu-free-font
+25. download SFMono to /usr/share/fonts/SFMono
+26. clone all dotfile repositories
+27. build dwm, dmenu, st
+28. install firefox alsa-firmware, alsa-utils, pulseaudio-alsa, pulsemixer, keepassxc, syncthing
+29. ### Separate front and read audio outputs
+load-module module-remap-sink sink_name=speakers sink_properties="device.description='Speakers'" remix=no master=alsa_output.pci-0000_22_00.3.analog-stereo channels=2 master_channel_map=front-left,front-right channel_map=front-left,front-right
+load-module module-remap-sink sink_name=headphones sink_properties="device.description='Headphones'" remix=no master=alsa_output.pci-0000_22_00.3.analog-stereo channels=2 master_channel_map=rear-left,rear-right channel_map=front-left,front-right
+30. add files and folders to cache which are not created for status, python and maybe other

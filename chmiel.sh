@@ -91,7 +91,7 @@ gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
 	dialog --title "beer™ Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master;}
+	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin patched;}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
@@ -173,7 +173,7 @@ for x in curl ca-certificates base-devel git ntp zsh ; do
 done
 
 dialog --title "beer™ Installation" --infobox "Synchronizing system time to ensure successful and secure installation of software..." 4 70
-ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
+ntpdate 0.pl.pool.ntp.org >/dev/null 2>&1
 
 adduserandpass || error "Error adding username and/or password."
 
@@ -200,12 +200,12 @@ installationloop
 
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
-rm -f "/home/$name/README.md" "/home/$name/LICENSE"
+# if those would exist remove them: rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 # Create default urls file if none exists.
 # TODO: use subs to generate urls from yt subs manager
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "https://www.archlinux.org/feeds/news/" > "/home/$name/.config/newsboat/urls"
 # make git ignore deleted LICENSE & README.md files
-git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE"
+# git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE"
 
 # Most important command! Get rid of the beep!
 systembeepoff
