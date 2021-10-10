@@ -1,0 +1,1 @@
+qemu-system-x86_64 Arch-Linux-x86_64-basic-20211009.36233.qcow2 -drive file=testing.img,format=raw -m 4G
