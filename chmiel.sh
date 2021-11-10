@@ -59,7 +59,7 @@ adduserandpass() { \
 	dialog --infobox "Adding user \"$name\"..." 4 50
 	useradd -m -g wheel -s /bin/zsh "$name" >/dev/null 2>&1 ||
 	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
-	export repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel "$(dirname "$repodir")"
+	export repodir="/home/$name/workspace/repos"; mkdir -p "$repodir"; chown -R "$name":wheel "$(dirname "$repodir")"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
@@ -206,6 +206,11 @@ putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "https://www.archlinux.org/feeds/news/" > "/home/$name/.config/newsboat/urls"
 # make git ignore deleted LICENSE & README.md files
 # git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE"
+
+# Install SFMono font
+curl -Lo /tmp/master.zip https://github.com/supercomputra/SF-Mono-Font/archive/refs/heads/master.zip
+mkdir -p /usr/share/fonts/SFMono
+unzip /tmp/master.zip -d /usr/share/fonts/SFMono
 
 # Most important command! Get rid of the beep!
 systembeepoff
