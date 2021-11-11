@@ -50,7 +50,7 @@ G,https://github.com/jaenek/slock.git,"allows you to lock your computer, and qui
 ,socat,"is a utility which establishes two byte streams and transfers data between them."
 ,moreutils,"is a collection of useful unix tools."
 ,docker,"is a container based vm utility."
-,docker,"is a solution for mulicontainer docker environments."
+,docker-compose,"is a solution for mulicontainer docker environments."
 A,ttf-unifont,"based monochrome utf-8 font."
 ,transmission-cli,"is a command-line interface for a well known bitttorent client."
 ,tmux,"is a helpful terminal multiplexer."
